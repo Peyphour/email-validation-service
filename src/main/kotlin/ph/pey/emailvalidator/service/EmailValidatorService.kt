@@ -1,5 +1,6 @@
 package ph.pey.emailvalidator.service
 
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 import org.xbill.DNS.Lookup
 import org.xbill.DNS.Type
@@ -12,6 +13,7 @@ class EmailValidatorService {
      *  - Has at least one '@'
      *  - The domain has at least one MX record
      */
+    @Cacheable("emails")
     fun isValidEmail(email: String): Boolean {
 
         if(email.count { it == '@' } == 0)
